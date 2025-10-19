@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Galerie Photo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let photo of photoService.photos">
+        <ion-card>
+          <!-- 📸 Image cliquable pour ouvrir en grand -->
+          <ion-img
+            [src]="photo.webviewPath"
+            (click)="openPhoto(photo)"
+          ></ion-img>
+
+          <ion-card-content class="ion-text-center">
+            <!-- ❤️ Bouton like -->
+            <ion-button
+              fill="clear"
+              size="small"
+              (click)="photoService.toggleLike(photo); $event.stopPropagation();"
+            >
+              <ion-icon
+                slot="icon-only"
+                [name]="photo.liked ? 'heart' : 'heart-outline'"
+              ></ion-icon>
+            </ion-button>
+
+            <!-- 🧮 Compteur de likes -->
+            <div *ngIf="photo.likesCount">
+              ❤️ {{ photo.likesCount }}
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- 📷 Bouton flottant pour ajouter une photo -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

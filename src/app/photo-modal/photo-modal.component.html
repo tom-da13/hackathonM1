@@ -1,0 +1,15 @@
+<ion-content class="ion-padding ion-text-center">
+  <ion-img [src]="photo.webviewPath" class="photo-large"></ion-img>
+
+  <div class="ion-margin-top">
+    <p><strong>📅 Prise le :</strong> {{ photo.timestamp || 'Inconnue' }}</p>
+    <p *ngIf="photo.location">
+      <strong>📍 Lieu :</strong>
+      {{ photo.location.latitude.toFixed(4) }},
+      {{ photo.location.longitude.toFixed(4) }}
+    </p>
+    <p *ngIf="!photo.location">📍 Localisation non disponible</p>
+  </div>
+
+  <ion-button expand="block" color="medium" (click)="close()">Fermer</ion-button>
+</ion-content>
